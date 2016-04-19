@@ -23,7 +23,7 @@ import de.greenrobot.event.EventBus;
 public class ListFragment extends Fragment {
 
     private EventBus bus = EventBus.getDefault();
-    private ArrayList<Contact> placeList = new ArrayList<>();
+    private ArrayList<Contact> contactList = new ArrayList<>();
     ContactListAdapter adapter;
 
     @Override
@@ -40,7 +40,7 @@ public class ListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ContactListAdapter(getActivity(),placeList);
+        adapter = new ContactListAdapter(getActivity(),contactList);
         recyclerView.setAdapter(adapter);
 //        ((HomeActivity) getActivity()).postEventBus();
         return rootView;
@@ -51,8 +51,8 @@ public class ListFragment extends Fragment {
         super.onDestroy();
     }
     public void onEvent(RequestCompleted event){
-        placeList = event.getArrayList();
-        adapter.update(placeList);
+        contactList = event.getArrayList();
+        adapter.update(contactList);
         adapter.notifyDataSetChanged();
     }
 }
