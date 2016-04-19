@@ -47,29 +47,15 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public void onBindViewHolder(ContactsViewHolder viewHolder, int position) {
         final Contact contact = contactList.get(position);
-        //Log.d("adapter2",w.getName());
         viewHolder.tv_name.setText("Name: "+contact.getName());
         viewHolder.tv_email.setText("Email: "+contact.getEmail());
         viewHolder.tv_phone.setText("Phone: "+contact.getPhone());
         viewHolder.tv_officephone.setText("Office Phone: "+contact.getOfficePhone());
-//        viewHolder.id = w.getId();
-//        Log.d("id",viewHolder.id);
-//        Picasso.with(context).load(contact.getThumbnailUrl()).into(viewHolder.thumbNail);
     }
 
     @Override
     public ContactsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_contacts, viewGroup, false);
-//        if(variable.equals("explore")) {
-//            itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_vertical, viewGroup, false);
-//        }else {
-//            itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_horizontal, viewGroup, false);
-//            final float scale = context.getResources().getDisplayMetrics().density;
-//            int width = Utils.getScreenWidth(context)-((int) (25 * scale + 0.5f));
-//            int height = (int) (200 * scale + 0.5f);
-//            RelativeLayout layout = (RelativeLayout) itemView.findViewById(R.id.layout);
-//            layout.setLayoutParams(new RelativeLayout.LayoutParams(width,height));
-//        }
         return new ContactsViewHolder(itemView);
     }
 

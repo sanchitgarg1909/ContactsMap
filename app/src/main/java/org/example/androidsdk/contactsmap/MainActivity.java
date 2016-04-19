@@ -16,7 +16,7 @@ import de.greenrobot.event.EventBus;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Contact> contactList;
+    ArrayList<Contact> contactList = new ArrayList<>();
     private EventBus bus = EventBus.getDefault();
 
     @Override

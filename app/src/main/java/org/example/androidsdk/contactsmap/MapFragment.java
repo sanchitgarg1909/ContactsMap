@@ -65,7 +65,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
 //        googleMap.setMyLocationEnabled(true);
         googleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 //        arrayList = ((ListingActivity)getActivity()).postEventBus();
-//        ((HomeActivity)getActivity()).postEventBus();
+        ((MainActivity)getActivity()).postEventBus();
 //        fixedLocation(arrayList);
     }
 

@@ -42,7 +42,6 @@ public class ListFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new ContactListAdapter(getActivity(),contactList);
         recyclerView.setAdapter(adapter);
-//        ((HomeActivity) getActivity()).postEventBus();
         return rootView;
     }
     @Override
