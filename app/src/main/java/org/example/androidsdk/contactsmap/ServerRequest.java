@@ -3,6 +3,7 @@ package org.example.androidsdk.contactsmap;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
@@ -82,6 +83,7 @@ public class ServerRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("response", "Error: " + error.getMessage());
+                Toast.makeText(context,"Please check your internet connection",Toast.LENGTH_SHORT);
                 progressDialog.dismiss();
             }
         });

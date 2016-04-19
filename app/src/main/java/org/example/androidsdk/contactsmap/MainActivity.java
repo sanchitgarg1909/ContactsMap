@@ -1,5 +1,8 @@
 package org.example.androidsdk.contactsmap;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
             public void callback(ArrayList<Contact> arrayList) {
                 contactList = arrayList;
                 postEventBus();
+                for(int i = 0;i<contactList.size();i++) {
+                    Contact c = contactList.get(i);
+                    ContactHelper.insertContact(getContentResolver(),c.getName(),c.getEmail(),c.getPhone(),c.getOfficePhone());
+                }
             }
         });
     }
