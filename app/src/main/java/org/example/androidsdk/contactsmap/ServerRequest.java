@@ -47,38 +47,35 @@ public class ServerRequest {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("response", response.toString());
+//                        Log.d("response", response.toString());
 //                        ArrayList<String> favlist = new ArrayList<>();
-//                        ArrayList<Place> placeList = new ArrayList<>();
-//                        try{
-//                            JSONArray events = response.getJSONArray(0);
-//                            JSONArray favourites = response.getJSONArray(1);
-//                            for(int i = 0; i < favourites.length(); i++){
-//                                favlist.add(favourites.getString(i));
-//                            }
-//                            for (int i = 0; i < events.length(); i++) {
-//                                JSONObject obj = events.getJSONObject(i);
-//                                Place place = new Place();
-//                                place.setTitle(obj.getString("name"));
-//                                place.setThumbnailUrl(obj.getJSONArray("userimageurl").getString(0));
-//                                place.setLocation(obj.getString("location"));
-//                                place.setRating(Double.parseDouble(obj.getJSONObject("rating").getString("value")));
-//                                place.setPrice(Integer.parseInt(obj.getString("price")));
-//                                place.setVisibility(true);
-//                                place.setEventId(obj.getString("_id"));
-//                                place.setLatitude(Double.parseDouble(obj.getString("lat")));
-//                                place.setLongitude(Double.parseDouble(obj.getString("long")));
-//                                if(favlist.contains(obj.get("_id")))
-//                                    place.setFavourite(true);
-//                                else
-//                                    place.setFavourite(false);
-//                                placeList.add(place);
-//                            }
-//                        }
-//                        catch (JSONException e){
-//                            e.printStackTrace();
-//                        }
-                        getResponseCallback.callback(response.toString());
+                        ArrayList<Contact> contactArrayList = new ArrayList<>();
+                        try{
+                            JSONObject object = response.getJSONObject(0);
+                            JSONArray contacts = object.getJSONArray("contacts");
+                            for (int i = 0; i < contacts.length(); i++) {
+                                JSONObject obj = contacts.getJSONObject(i);
+//                                Log.d("phone",String.valueOf(obj.getLong("phone")));
+                                Contact contact = new Contact();
+                                if(!obj.isNull("name"))
+                                    contact.setName(obj.getString("name"));
+                                if(!obj.isNull("email"))
+                                    contact.setEmail(obj.getString("email"));
+                                if(!obj.isNull("phone"))
+                                    contact.setPhone(String.valueOf(obj.getLong("phone")));
+                                if(!obj.isNull("officePhone"))
+                                    contact.setOfficePhone(String.valueOf(obj.getLong("officePhone")));
+                                if(!obj.isNull("latitude"))
+                                    contact.setLatitude(obj.getDouble("latitude"));
+                                if(!obj.isNull("longitude"))
+                                    contact.setLongitude(obj.getDouble("longitude"));
+                                contactArrayList.add(contact);
+                            }
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                        getResponseCallback.callback(contactArrayList);
                         progressDialog.dismiss();
                     }
                 }, new Response.ErrorListener() {

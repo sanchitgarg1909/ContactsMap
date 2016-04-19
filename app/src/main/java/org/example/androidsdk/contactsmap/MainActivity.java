@@ -5,10 +5,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
+
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<Contact> contactList;
+    private EventBus bus = EventBus.getDefault();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViewPagerAndTabs() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         TabsPagerAdapter pagerAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new MapFragment(), "All Contacts");
+        pagerAdapter.addFragment(new ListFragment(), "All Contacts");
         pagerAdapter.addFragment(new MapFragment(), "Contacts Map");
         viewPager.setAdapter(pagerAdapter);
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
@@ -42,10 +48,14 @@ public class MainActivity extends AppCompatActivity {
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.getContacts(new GetResponseCallback() {
             @Override
-            public void callback(String response) {
-//                placeList = arrayList;
-//                postEventBus();
+            public void callback(ArrayList<Contact> arrayList) {
+                contactList = arrayList;
+                postEventBus();
             }
         });
     }
+    public void postEventBus(){
+        bus.post(new RequestCompleted(contactList));
+    }
+
 }
